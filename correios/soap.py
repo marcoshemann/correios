@@ -12,12 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import logging
-
 from requests import Session
 from zeep import Client, Transport
-
-logger = logging.getLogger(__name__)
 
 
 class SoapClient(Client):
@@ -26,11 +22,8 @@ class SoapClient(Client):
         session.cert = cert
         session.verify = verify
         session.timeout = timeout
-        session.headers.update({'Content-Type': 'text/xml;charset=UTF-8'})
+        session.headers.update({"Content-Type": "text/xml;charset=UTF-8"})
 
-        transport = Transport(
-            operation_timeout=timeout,
-            session=session
-        )
+        transport = Transport(operation_timeout=timeout, session=session)
 
         super().__init__(wsdl=wsdl, transport=transport, **kwargs)
